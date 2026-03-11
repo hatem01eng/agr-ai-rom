@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.neural_network import MLPRegressor
 from sklearn.metrics import mean_squared_error
@@ -32,7 +33,20 @@ model.fit(X_train, y_train)
 # Prediction
 pred = model.predict(X_test)
 
-# Error calculation
+# Error
 mse = mean_squared_error(y_test, pred)
 
 print("Test MSE:", mse)
+
+# Plot comparison
+true_flux = y_test[0]
+pred_flux = pred[0]
+
+plt.figure(figsize=(8,5))
+plt.plot(true_flux, label="True Flux")
+plt.plot(pred_flux, label="Predicted Flux")
+plt.xlabel("Position")
+plt.ylabel("Neutron Flux")
+plt.title("AI Prediction vs True Neutron Flux")
+plt.legend()
+plt.show()
